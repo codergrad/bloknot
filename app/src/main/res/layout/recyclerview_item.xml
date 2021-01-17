@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:layout_width="75dp"
-    android:layout_height="50dp">
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_margin="20dp"
+    android:background="#f3f5ce"
+    >
 
     <TextView
         android:id="@+id/info_text"
