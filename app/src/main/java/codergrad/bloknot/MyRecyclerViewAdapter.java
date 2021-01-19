@@ -17,13 +17,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
+    // Загружаем данныые в адаптер
     MyRecyclerViewAdapter(Context context, ArrayList<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
-    // inflates the cell layout from xml when needed
+    // "Надуваем" ячейку из XML-макета
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,13 +31,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return new ViewHolder(view);
     }
 
-    // binds the data to the TextView in each cell
+    // Цепляем данные к TextView каждой ячейке
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.myTextView.setText(mData.get(position));
     }
 
-    // total number of cells
+    // Всего ячеек
     @Override
     public int getItemCount() {
         return mData.size();
@@ -58,17 +58,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    // convenience method for getting data at click position
+    // Удобный метод получения номера ячейки
     String getItem(int id) {
         return mData.get(id);
     }
 
-    // allows clicks events to be caught
+    // Позволяет реагировать на нажатия
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
+    // родительское activity должно реализовывать этот метод для обработки нажатий
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
