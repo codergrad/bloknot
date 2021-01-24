@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="343dp"
+        android:layout_height="28dp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="678dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Размер текста заметок"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="659dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="34dp"
+        android:text="Аа"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="21dp"
+        android:layout_height="19dp"
+        android:text="Аа"
+        tools:layout_editor_absoluteX="378dp"
+        tools:layout_editor_absoluteY="678dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="178dp"
+        android:layout_height="87dp"
+        android:text="Времени создания"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="412dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="В 2 колонки"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Показать детали"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="632dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="178dp"
+        android:layout_height="87dp"
+        android:text="Последнему изменению"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="515dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отображать"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="В 3 колонки"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="178dp"
+        android:layout_height="87dp"
+        android:text="Алфавиту"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="515dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Показать только заголовки"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="605dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="178dp"
+        android:layout_height="87dp"
+        android:text="Вручную"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="412dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Упорядочить по"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="377dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+=
