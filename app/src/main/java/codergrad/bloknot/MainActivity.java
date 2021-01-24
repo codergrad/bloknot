@@ -1,24 +1,24 @@
 package codergrad.bloknot;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +39,21 @@ public class MainActivity extends AppCompatActivity {
             int clickCounter = 0;
             @Override
             public void onClick(View view) {
-                data.add("New note created!");
+                SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+                db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
+                db.execSQL("INSERT INTO notes VALUES (0, 'Sample title', 'Sample Content', '22.01.2021')");
+                Cursor query = db.rawQuery("SELECT * FROM notes", null);
+                String content = "";
+                while(query.moveToNext()) {
+                   content = query.getString(1);
+                }
+                data.add(content);
                 adapter.notifyItemInserted(clickCounter);
                 clickCounter++;
+                query.close();
+                db.close();
             }
+
         });
     }
 
