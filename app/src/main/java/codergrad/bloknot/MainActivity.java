@@ -33,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, data);
         recyclerView.setAdapter(adapter);
-        CardView cardview = (CardView) findViewById(R.id.cardview);
-        cardview.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View v) {
-                testPONK();
-                return true;
-            } });
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             int clickCounter = 0;
@@ -70,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //Тестовая функция, создающая Toast
     public void testPONK(){
         Context context = getApplicationContext();
         CharSequence text = "Hello toast!";
@@ -79,3 +74,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Long click detected", Toast.LENGTH_SHORT);
         toast.show();}
 }
+/* TODO: Попытаться создать Listener, который бы мониторил новосозданные объекты
+cardview будет null, т.к. в начале его не существует, а добавляется он через fab
+
+    public boolean OnLongClickListener(View view){
+        CardView cardview = (CardView) findViewById(R.id.cardview);
+        cardview.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View view) {
+         testPONK();
+        } });
+    }
+ */
