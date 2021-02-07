@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrashActivity"
+    >
+
+    <!-- надпись "корзина" -->
+    <TextView
+        android:id="@+id/trash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:text="Корзина"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Восстановить -->
+    <Button
+        android:id="@+id/BtnRestore"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="4dp"
+        android:drawableTop="@drawable/ic_restore_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Удалить -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="4dp"
+        android:drawableTop="@drawable/ic_delete_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Поиск -->
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="4dp"
+        android:drawableTop="@drawable/ic_search_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Настройки -->
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="4dp"
+        android:drawableTop="@drawable/ic_settings_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Тестирую эту хрень -->
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_settings_btn"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
