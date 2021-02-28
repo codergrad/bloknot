@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Toast.makeText(this, "Long click detected", Toast.LENGTH_SHORT);
-        toast.show();}
 }
 /* TODO: Попытаться создать Listener, который бы мониторил новосозданные объекты
 cardview будет null, т.к. в начале его не существует, а добавляется он через fab
