@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UserAcitvity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
     EditText titleBox;
     EditText dateBox;
     Button delButton;
@@ -18,15 +18,15 @@ public class UserAcitvity extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor userCursor;
     long userId=0;
-    @Override
+ //   @Override
     protected void OnCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noteslist);
 
-        titleBox = (EditText) findViewById(R.id.title);
-        dateBox = (EditText) findViewById(R.id.date);
-        delButton = (Button) findViewById(R.id.delButton);
-        saveButton = (Button) findViewById(R.id.saveButton);
+        titleBox = findViewById(R.id.title);
+  //      dateBox = (EditText) findViewById(R.id.date);
+  //     delButton = (Button) findViewById(R.id.delButton);
+  //      saveButton = (Button) findViewById(R.id.saveButton);
 
         sqlHelper = new DatabaseHelper(this);
         db = sqlHelper.open();
@@ -36,11 +36,11 @@ public class UserAcitvity extends AppCompatActivity {
             userId = extras.getLong("id");
         }
         if (userId > 0) {
-            userCursor = db.rawQuery("select * from" + DatabaseHelper.TABLE +
+            userCursor = db.rawQuery("select * from " + DatabaseHelper.TABLE +
                     " where " + DatabaseHelper.COLUMN_ID + "=?",
                     new String[]{String.valueOf(userId)});
             userCursor.moveToFirst();
-            titleBox.setText("")
+            titleBox.setText("");
         }
     }
 

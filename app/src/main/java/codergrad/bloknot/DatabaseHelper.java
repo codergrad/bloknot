@@ -26,9 +26,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String COLUMN_DATE = "Date";
     private Context myContext;
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DatabaseHelper(@Nullable Context context) {
+        //, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version
         super(context, DB_NAME, null, SCHEMA);
         this.myContext=context;
+        assert context != null;
         DB_PATH = context.getFilesDir().getPath() + DB_NAME;
     }
 
