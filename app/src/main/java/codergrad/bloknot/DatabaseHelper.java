@@ -16,11 +16,11 @@ import java.io.IOException;
 
 class DatabaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH;
-    private static String DB_NAME = "app.db";
+    private static String DB_NAME = "database.db";
     private static final int SCHEMA = 1;
     static final String TABLE = "notes";
 
-    static final String COLUMN_ID = "ID";
+    static final String COLUMN_ID = "rowid";
     static final String COLUMN_TITLE = "Title";
     static final String COLUMN_CONTENT = "Content";
     static final String COLUMN_DATE = "Date";
@@ -36,12 +36,13 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE + " ("+ COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ COLUMN_TITLE +" TEXT, "+ COLUMN_CONTENT +" TEXT, "+ COLUMN_DATE +" TEXT);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE);
+        onCreate(db);
     }
 
     void create_db(){

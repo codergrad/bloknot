@@ -1,10 +1,13 @@
 package codergrad.bloknot;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,44 +19,55 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
+    DatabaseAdapter dbAdapter;
     SQLiteDatabase db;
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
+    ArrayAdapter<Note> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        dbAdapter = new DatabaseAdapter(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ArrayList<String> data = new ArrayList<String>(); //рудимент
-
+        ArrayList<String> dataString = new ArrayList<String>();
+        dbAdapter.open();
+        ArrayList<Note> dataNotes = dbAdapter.getNotes();
+        System.out.println("********************");
+        System.out.println("**************" + dataNotes.);
+        //TODO: Переконвертировать List<Note> в ArrayList
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 3;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, data);
+
         recyclerView.setAdapter(adapter);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             int clickCounter = 0;
             @Override
             public void onClick(View view) {
+
+                /**
                 SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
                 db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
                 db.execSQL("INSERT INTO notes VALUES (0, 'Sample title', 'Sample Content', '22.01.2021')");
                 Cursor query = db.rawQuery("SELECT * FROM notes", null);
-                String content = "";
+                String content = "ikik";
                 while(query.moveToNext()) {
                    content = query.getString(1);
                 }
@@ -62,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 clickCounter++;
                 query.close();
                 db.close();
+                 **/
             }
 
         });
@@ -87,5 +102,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void OnResume(){
+        super.onResume();
+        DatabaseAdapter adapter = new DatabaseAdapter(this);
+        adapter.open();
+        List<Note> notes = adapter.getNotes();
+
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        adapter.close();
+    }
+    public void add(View view){
+        Intent intent = new Intent(this, NotesActivity.class);
+        startActivity(intent);
     }
 }
