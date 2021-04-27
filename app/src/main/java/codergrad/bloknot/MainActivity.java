@@ -40,29 +40,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         dbAdapter = new DatabaseAdapter(this);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ArrayList<String> data = new ArrayList<String>(); //рудимент
-        ArrayList<String> dataString = new ArrayList<String>();
         dbAdapter.open();
         ArrayList<Note> dataNotes = dbAdapter.getNotes();
-        System.out.println("********************");
-        System.out.println("**************" + dataNotes.);
-        //TODO: Переконвертировать List<Note> в ArrayList
+        dbAdapter.close();
+
+        //// PLACEHOLDERS
+        dataNotes.add(new Note(0,"First title", "Content","27.04.2021"));
+        dataNotes.add(new Note(1,"2 title", "22Content","27.04.2021"));
+        dataNotes.add(new Note(2,"3333 title", "Content","27.04.2021"));
+        ////
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 3;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, data);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes);
 
         recyclerView.setAdapter(adapter);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            int clickCounter = 0;
+            long clickCounter = 0; //рудимент
             @Override
             public void onClick(View view) {
-
-                /**
+                /** Это старый код, который добавлял без DatabaseAdapter даннные напрямую в БД. Будет переписан
                 SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
                 db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
                 db.execSQL("INSERT INTO notes VALUES (0, 'Sample title', 'Sample Content', '22.01.2021')");
