@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         DatabaseAdapter adapter = new DatabaseAdapter(this);
         adapter.open();
-        List<Note> notes = adapter.getNotes();
+        ArrayList<Note> notes = adapter.getNotes();
+
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         adapter.close();
