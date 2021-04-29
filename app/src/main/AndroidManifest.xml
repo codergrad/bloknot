@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloknot">
         <activity android:name=".NotesActivity"></activity>
+        <activity android:name=".Settings_activity"></activity>
         <activity android:name=".TrashActivity"></activity>
         <activity
             android:name=".MainActivity"
