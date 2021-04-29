@@ -9,9 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloknot">
-        <activity android:name=".MainActivity"></activity>
+        
+        Settings_activity
+        <activity android:name=".Settings_activity"></activity>
+        
+        
+      
+      
+        
+      
+      
+        <activity android:name=".TrashActivity"></activity>
+        
+      
+      
+        
+      
+      
+        main
         <activity
-            android:name=".Settings_activity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Bloknot.NoActionBar">
             <intent-filter>
