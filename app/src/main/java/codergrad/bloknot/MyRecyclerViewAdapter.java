@@ -13,12 +13,12 @@ import java.util.ArrayList;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<String> mData;
+    private ArrayList<Note> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // Загружаем данныые в адаптер
-    MyRecyclerViewAdapter(Context context, ArrayList<String> data) {
+    MyRecyclerViewAdapter(Context context, ArrayList<Note> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -34,7 +34,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // Цепляем данные к TextView каждой ячейке
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myTextView.setText(mData.get(position));
+        holder.myTextView.setText(mData.get(position).getTitle());
     }
 
     // Всего ячеек
@@ -59,8 +59,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // Удобный метод получения номера ячейки
-    String getItem(int id) {
-        return mData.get(id);
+    long getItem(int id) {
+        return mData.get(id).getId();
     }
 
     // Позволяет реагировать на нажатия
