@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,44 +9,43 @@
         android:id="@+id/seekBar"
         android:layout_width="343dp"
         android:layout_height="28dp"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="678dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Размер текста заметок"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="659dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        tools:layout_editor_absoluteX="8dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="34dp"
         android:text="Аа"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        tools:layout_editor_absoluteX="8dp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="21dp"
         android:layout_height="19dp"
         android:text="Аа"
-        tools:layout_editor_absoluteX="378dp"
-        tools:layout_editor_absoluteY="678dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/switch2" />
+
 
     <Switch
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:text="Показать детали"
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="632dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
     <TextView
         android:id="@+id/textView4"
@@ -55,25 +53,34 @@
         android:layout_height="wrap_content"
         android:text="Отображать"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout2"
-        tools:layout_editor_absoluteX="33dp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.882" />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Показать только заголовки"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="605dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout3" />
+
+    //==============================================================//
+
+    //==============================================================//
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Упорядочить по"
+        android:text=" Упорядочить по "
         app:layout_constraintBottom_toTopOf="@+id/gridLayout3"
-        tools:layout_editor_absoluteX="32dp" />
-//==============================================================//
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout2"
+        app:layout_constraintVertical_bias="0.462" />
 
     <GridLayout
         android:id="@+id/gridLayout3"
@@ -82,8 +89,10 @@
         android:layout_gravity="center"
         android:columnCount="4"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="431dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout2">
 
         <Button
             android:layout_rowSpan="3"
@@ -98,8 +107,6 @@
             android:text="Последним изменения" />
     </GridLayout>
 
-    //==============================================================//
-
     <GridLayout
         android:id="@+id/gridLayout2"
         android:layout_width="wrap_content"
@@ -107,14 +114,17 @@
         android:layout_gravity="center"
         android:columnCount="5"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="315dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <Button
             android:layout_width="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
             android:text="В 3 колонки" />
-
 
         <Button
             android:layout_width="wrap_content"
