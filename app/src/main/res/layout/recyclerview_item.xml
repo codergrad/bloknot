@@ -5,6 +5,14 @@
     android:background="#f3f5ce"  android:layout_height="150dp" android:layout_width="150dp"
     android:layout_margin="5dp"
     android:padding="5dp" >
+
+    <Button
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:id="@+id/NoteActionBtn"
+    />
+
     <androidx.cardview.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardview"

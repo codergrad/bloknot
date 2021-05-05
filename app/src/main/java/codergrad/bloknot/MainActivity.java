@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
@@ -81,8 +82,17 @@ public class MainActivity extends AppCompatActivity {
                 db.close();
                  **/
             }
-
         });
+
+        Button NoteActionBtn = (Button) findViewById(R.id.NoteActionBtn);
+        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -106,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void OnResume(){
         super.onResume();
         DatabaseAdapter adapter = new DatabaseAdapter(this);
@@ -116,8 +127,11 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         adapter.close();
     }
+
     public void add(View view){
         Intent intent = new Intent(this, NotesActivity.class);
         startActivity(intent);
     }
+
+
 }
