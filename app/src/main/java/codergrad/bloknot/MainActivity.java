@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button NoteActionBtn = (Button) findViewById(R.id.NoteActionBtn);
+        Button NoteActionBtn = findViewById(R.id.NoteActionBtn);
         NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
