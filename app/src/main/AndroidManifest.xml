@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloknot">
-        <activity android:name=".NotesActivity"></activity>
-        <activity android:name=".Settings_activity"></activity>
-        <activity android:name=".TrashActivity"></activity>
+        <activity android:name=".NoteActivity"></activity>
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".Settings_activity" />
+        <activity android:name=".TrashActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
