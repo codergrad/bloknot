@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
@@ -95,13 +95,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (item.getItemId())
+        {
+            case R.id.action_settings:
 
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+
+                return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -124,24 +134,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 }
-    Button action_settings;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        this.savedInstanceState = savedInstanceState;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        action_settings = (Button) findViewById(R.id.action_settings);
-        action_settings.setOnClickListener(this);
-    }
-     @Override
-    public void onClick(View v) {
-        switch (v. getId()) {
-            case R.id.action_settings:
-                Intent intent = new Intent (this, SettingsActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-}
+
 
