@@ -1,5 +1,6 @@
 package codergrad.bloknot;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,13 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
     ArrayAdapter<Note> arrayAdapter;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,3 +124,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+    Button action_settings;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        this.savedInstanceState = savedInstanceState;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        action_settings = (Button) findViewById(R.id.action_settings);
+        action_settings.setOnClickListener(this);
+    }
+     @Override
+    public void onClick(View v) {
+        switch (v. getId()) {
+            case R.id.action_settings:
+                Intent intent = new Intent (this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+}
+
