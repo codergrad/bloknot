@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             long clickCounter = 0; //рудимент
             @Override
             public void onClick(View view) {
+                NewNote();
                 /** Это старый код, который добавлял без DatabaseAdapter даннные напрямую в БД. Будет переписан
                 SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
                 db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
