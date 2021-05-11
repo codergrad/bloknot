@@ -34,7 +34,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // Цепляем данные к TextView каждой ячейке
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myTextView.setText(mData.get(position).getTitle());
+        holder.cardviewTitle.setText(mData.get(position).getTitle());
+        holder.cardviewContent.setText(mData.get(position).getContent());
     }
 
     // Всего ячеек
@@ -44,11 +45,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        TextView cardviewTitle;
+        TextView cardviewContent;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.info_text);
+            cardviewTitle = itemView.findViewById(R.id.cardviewTitle);
+            cardviewContent = itemView.findViewById(R.id.cardviewContent);
             itemView.setOnClickListener(this);
         }
 
