@@ -27,9 +27,7 @@ public static final String EXTRA_MESSAGE = "ru.codergrad.bloknot.MESSAGE";
         noteContent = (EditText) findViewById(R.id.noteContent);
 
         dbAdapter = new DatabaseAdapter(this);
-        dbAdapter.open();
-        noteID = dbAdapter.getCount();
-        dbAdapter.close();
+
 
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener(){
@@ -47,11 +45,8 @@ public static final String EXTRA_MESSAGE = "ru.codergrad.bloknot.MESSAGE";
        String content = noteContent.getText().toString();
        Note note = new Note(noteID, title, content, null);
        dbAdapter.open();
-       if (noteID > 0){
-           dbAdapter.update(note);
-       } else {
-           dbAdapter.insert(note);
-       }
+       noteID = dbAdapter.getCount();
+       dbAdapter.insert(note);
        noteID++;
        dbAdapter.close();
         goHome();
@@ -60,9 +55,8 @@ public static final String EXTRA_MESSAGE = "ru.codergrad.bloknot.MESSAGE";
         Intent intent = new Intent(this, MainActivity.class);
         String title = noteTitle.getText().toString();
         String content = noteContent.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, title);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+       // intent.putExtra(EXTRA_MESSAGE, title);
+       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); //вызывало проблемы
         startActivity(intent);
-        //TODO: Bundle extras
     }
 }
