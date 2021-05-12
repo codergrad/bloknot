@@ -84,18 +84,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * полуработающий обработчик длинного нажатия. Работает только если создан recyclerView_item.
+        /** полуработающий обработчик длинного нажатия. Работает только если создан recyclerView_item.
          * Заморожен до требования, или насовсем.
+         * commit
+        **/
+
         Button NoteActionBtn = findViewById(R.id.cardview);
         NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                
+                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
+                if (TbLong.getVisibility() != View.VISIBLE) {
+
+                    TbLong.setVisibility(View.VISIBLE);
+                };
                 return true;
             }
         });
-        **/
+
     }
 
     @Override
