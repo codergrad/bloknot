@@ -23,7 +23,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,16 +43,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO: adapter.notifyItemInserted(noteID). Обновление RV по возвращению из NoteActivity
+        //TODO: БД не добавляет больше одной заметки. Скорее всего связанно с noteID
         dbAdapter = new DatabaseAdapter(this);
         dbAdapter.open();
         ArrayList<Note> dataNotes = dbAdapter.getNotes();
         dbAdapter.close();
-
-        //// PLACEHOLDERS
-        dataNotes.add(new Note(0,"First title", "Content","27.04.2021"));
-        dataNotes.add(new Note(1,"2 title", "22Content","27.04.2021"));
-        dataNotes.add(new Note(2,"3333 title", "Content","27.04.2021"));
-        ////
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             long clickCounter = 0; //рудимент
             @Override
             public void onClick(View view) {
+                NewNote();
                 /** Это старый код, который добавлял без DatabaseAdapter даннные напрямую в БД. Будет переписан
                 SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
                 db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
@@ -84,8 +80,26 @@ public class MainActivity extends AppCompatActivity {
                 db.close();
                  **/
             }
-
         });
+
+        /** полуработающий обработчик длинного нажатия. Работает только если создан recyclerView_item.
+         * Заморожен до требования, или насовсем.
+         * commit
+        **/
+
+        Button NoteActionBtn = findViewById(R.id.cardview);
+        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
+                if (TbLong.getVisibility() != View.VISIBLE) {
+
+                    TbLong.setVisibility(View.VISIBLE);
+                };
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -119,20 +133,23 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void OnResume(){
         super.onResume();
         DatabaseAdapter adapter = new DatabaseAdapter(this);
         adapter.open();
         ArrayList<Note> notes = adapter.getNotes();
-
-
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         adapter.close();
     }
+
+
     public void add(View view){
         Intent intent = new Intent(this, NotesActivity.class);
+    }
+    public void NewNote(){
+        Intent intent = new Intent(this, NoteActivity.class);
+
         startActivity(intent);
     }
 }
-
-
