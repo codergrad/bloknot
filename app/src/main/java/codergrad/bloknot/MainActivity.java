@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +78,26 @@ public class MainActivity extends AppCompatActivity {
                 db.close();
                  **/
             }
-
         });
+
+        /** полуработающий обработчик длинного нажатия. Работает только если создан recyclerView_item.
+         * Заморожен до требования, или насовсем.
+         * commit
+        **/
+
+        Button NoteActionBtn = findViewById(R.id.cardview);
+        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
+                if (TbLong.getVisibility() != View.VISIBLE) {
+
+                    TbLong.setVisibility(View.VISIBLE);
+                };
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -102,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void OnResume(){
         super.onResume();
         DatabaseAdapter adapter = new DatabaseAdapter(this);
@@ -110,8 +130,16 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         adapter.close();
     }
+
+
+    public void add(View view){
+        Intent intent = new Intent(this, NotesActivity.class);
+    }
     public void NewNote(){
         Intent intent = new Intent(this, NoteActivity.class);
+
         startActivity(intent);
     }
+
+
 }
