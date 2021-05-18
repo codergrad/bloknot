@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.solver.state.State;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,11 +24,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     SimpleCursorAdapter userAdapter;
     ArrayAdapter<Note> arrayAdapter;
     private Bundle savedInstanceState;
+    ArrayList<Note> dataNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 3;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes, this);
 
         recyclerView.setAdapter(adapter);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -82,11 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /** полуработающий обработчик длинного нажатия. Работает только если создан recyclerView_item.
-         * Заморожен до требования, или насовсем.
-         * commit
-        **/
-
+/**
         Button NoteActionBtn = findViewById(R.id.cardview);
         NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 };
                 return true;
             }
-        });
+        }); **/
+
 
     }
 
@@ -148,8 +149,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NotesActivity.class);
     }
     public void NewNote(){
-        Intent intent = new Intent(this, NoteActivity.class);
+  //      Intent intent = new Intent(this, NoteActivity.class);
+  //      startActivity(intent);
+    }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("selected_note", dataNotes.size()); ///!!!!!!!!!!!!!!!!
         startActivity(intent);
     }
 }

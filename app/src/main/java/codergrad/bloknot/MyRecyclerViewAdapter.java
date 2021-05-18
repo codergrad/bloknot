@@ -18,9 +18,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ItemClickListener mClickListener;
 
     // Загружаем данныые в адаптер
-    MyRecyclerViewAdapter(Context context, ArrayList<Note> data) {
+    MyRecyclerViewAdapter(Context context, ArrayList<Note> data, ItemClickListener onItemClick) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mClickListener = onItemClick;
     }
 
     // "Надуваем" ячейку из XML-макета
@@ -66,13 +67,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return mData.get(id).getId();
     }
 
-    // Позволяет реагировать на нажатия
+    /* Позволяет реагировать на нажатия
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
-    }
+    } */
 
     // родительское activity должно реализовывать этот метод для обработки нажатий
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
 }
