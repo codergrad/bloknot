@@ -67,10 +67,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return mData.get(id).getId();
     }
 
-    /* Позволяет реагировать на нажатия
+    // Позволяет реагировать на нажатия
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
-    } */
+    }
 
     // родительское activity должно реализовывать этот метод для обработки нажатий
     public interface ItemClickListener {

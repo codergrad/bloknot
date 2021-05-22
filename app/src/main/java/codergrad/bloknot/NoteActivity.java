@@ -12,12 +12,15 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 public class NoteActivity extends AppCompatActivity {
 DatabaseAdapter dbAdapter;
 EditText noteTitle;
 EditText noteContent;
 long noteID = 0;
-public static final String EXTRA_MESSAGE = "ru.codergrad.bloknot.MESSAGE";
+Intent intent = getIntent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,29 +28,38 @@ public static final String EXTRA_MESSAGE = "ru.codergrad.bloknot.MESSAGE";
 
         noteTitle = (EditText) findViewById(R.id.noteTitle);
         noteContent = (EditText) findViewById(R.id.noteContent);
-
+        Intent intent = getIntent();
+        Note extraNote = intent.getParcelableExtra("extraNoteKey");
+        noteTitle.setText(extraNote.getTitle());
+        noteContent.setText(extraNote.getContent());
+        long extraID = extraNote.getId();
         dbAdapter = new DatabaseAdapter(this);
-
 
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                save(v);
+                save(v, extraID, extraNote);
               /*  Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
 
             }
         });
         }
-   public void save(View view){
+   public void save(View view, long extraID, Note extraNote){
        String title = noteTitle.getText().toString();
        String content = noteContent.getText().toString();
-       Note note = new Note(noteID, title, content, null);
        dbAdapter.open();
        noteID = dbAdapter.getCount();
-       dbAdapter.insert(note);
-       noteID++;
+       if (extraID > noteID) {
+           Note note = new Note(noteID, title, content, null);
+           dbAdapter.insert(note);
+           noteID++;
+       } else {
+           extraNote.setTitle(title);
+           extraNote.setContent(content);
+           dbAdapter.update(extraNote);
+       }
        dbAdapter.close();
         goHome();
    }
