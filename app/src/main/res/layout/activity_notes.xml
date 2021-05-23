@@ -20,7 +20,7 @@
         android:id="@+id/content"
         android:hint="Введите текст..."
         app:layout_constraintTop_toBottomOf="@id/title"
-        />
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/saveButton"
         android:layout_width="0dp"
