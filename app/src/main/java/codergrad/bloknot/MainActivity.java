@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
 
                 return true;
         }
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NotesActivity.class);
         startActivity(intent);
     }
-}
+    }
+
 
 
