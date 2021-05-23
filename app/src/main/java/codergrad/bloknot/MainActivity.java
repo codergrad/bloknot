@@ -22,14 +22,13 @@ import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
@@ -96,24 +95,13 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch (item.getItemId())
-        {
-            case R.id.action_settings:
 
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-
-                return true;
-        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -135,7 +123,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NotesActivity.class);
         startActivity(intent);
     }
+}
+    Button action_settings;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        this.savedInstanceState = savedInstanceState;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        action_settings = (Button) findViewById(R.id.action_settings);
+        action_settings.setOnClickListener(this);
     }
-
-
+     @Override
+    public void onClick(View v) {
+        switch (v. getId()) {
+            case R.id.action_settings:
+                Intent intent = new Intent (this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+}
 
