@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +17,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ArrayList<Note> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private Context parent;
 
     // Загружаем данныые в адаптер
     MyRecyclerViewAdapter(Context context, ArrayList<Note> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.parent = context;
     }
 
     // "Надуваем" ячейку из XML-макета
@@ -53,6 +56,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             cardviewTitle = itemView.findViewById(R.id.cardviewTitle);
             cardviewContent = itemView.findViewById(R.id.cardviewContent);
             itemView.setOnClickListener(this);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //int ElemNum = getAdapterPosition();
+                    //Toast TEST = Toast.makeText(parent, "ТЫ ДОЛГО ЖМЁШЬ НА " + ElemNum + " ЗАМЕТКУ", Toast.LENGTH_SHORT);
+                    //TEST.show();
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -75,4 +88,5 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
 }

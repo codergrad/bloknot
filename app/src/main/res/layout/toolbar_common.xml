@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:background="?attr/colorPrimary"
-        android:visibility="invisible"
+        android:visibility="visible"
         >
         <Button
             android:id="@+id/BtnMarkAll"
