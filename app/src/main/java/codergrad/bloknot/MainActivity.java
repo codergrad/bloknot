@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -45,7 +46,10 @@ public class MainActivity extends AppCompatActivity  {
 
         //TODO: adapter.notifyItemInserted(noteID). Обновление RV по возвращению из NoteActivity
         //TODO: БД не добавляет больше одной заметки. Скорее всего связанно с noteID
-        
+
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         

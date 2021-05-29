@@ -12,7 +12,7 @@
         <activity
             android:name=".NoteActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".NotesActivity" />
+        <activity android:name=".NotesActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".TrashActivity" />
