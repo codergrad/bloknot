@@ -43,22 +43,12 @@ public class MainActivity extends AppCompatActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //TODO: adapter.notifyItemInserted(noteID). Обновление RV по возвращению из NoteActivity
-        //TODO: БД не добавляет больше одной заметки. Скорее всего связанно с noteID
-
-
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
         setDataNotes();
         buildRecyclerView(dataNotes);
-        
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 NewNote();
@@ -97,7 +87,7 @@ public class MainActivity extends AppCompatActivity  {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch (item.getItemId())
+        switch (id)
         {
             case R.id.action_settings:
 
@@ -105,10 +95,6 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent);
 
                 return true;
-        }
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
