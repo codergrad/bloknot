@@ -18,9 +18,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ItemClickListener mClickListener;
 
     // Загружаем данныые в адаптер
-    MyRecyclerViewAdapter(Context context, ArrayList<Note> data) {
+    MyRecyclerViewAdapter(Context context, ArrayList<Note> data, ItemClickListener onItemClick) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mClickListener = onItemClick;
     }
 
     // "Надуваем" ячейку из XML-макета
@@ -75,4 +76,5 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoteActivity">
+    <include layout="@layout/toolbar_common"/>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -32,14 +33,6 @@
         android:layout_below="@id/noteTitle"
         android:hint="Введите текст..."
         android:padding="20dp" />
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Сохранить"
-        android:onClick="save"
-        app:layout_constraintHorizontal_weight="1"
-        android:layout_below="@id/noteContent"
-        />
 </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
