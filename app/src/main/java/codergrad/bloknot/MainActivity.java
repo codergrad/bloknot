@@ -54,22 +54,6 @@ public class MainActivity extends AppCompatActivity  {
                 NewNote();
             }
         });
-
-/**
-        Button NoteActionBtn = findViewById(R.id.cardview);
-        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
-                if (TbLong.getVisibility() != View.VISIBLE) {
-
-                    TbLong.setVisibility(View.VISIBLE);
-                };
-                return true;
-            }
-        }); **/
-
-
     }
 
     @Override
