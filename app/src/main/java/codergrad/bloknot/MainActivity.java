@@ -1,32 +1,31 @@
 package codergrad.bloknot;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
@@ -35,50 +34,41 @@ public class MainActivity extends AppCompatActivity {
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
     ArrayAdapter<Note> arrayAdapter;
+    private Bundle savedInstanceState;
+    ArrayList<Note> dataNotes;
+    private Object Note;
+    private Object ArrayList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //TODO: adapter.notifyItemInserted(noteID). Обновление RV по возвращению из NoteActivity
-        //TODO: БД не добавляет больше одной заметки. Скорее всего связанно с noteID
-        dbAdapter = new DatabaseAdapter(this);
-        dbAdapter.open();
-        ArrayList<Note> dataNotes = dbAdapter.getNotes();
-        dbAdapter.close();
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        int numberOfColumns = 3;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes);
-
-        recyclerView.setAdapter(adapter);
+        setDataNotes();
+        buildRecyclerView(dataNotes);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            long clickCounter = 0; //рудимент
             @Override
             public void onClick(View view) {
                 NewNote();
-                /** Это старый код, который добавлял без DatabaseAdapter даннные напрямую в БД. Будет переписан
-                SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
-                db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
-                db.execSQL("INSERT INTO notes VALUES (0, 'Sample title', 'Sample Content', '22.01.2021')");
-                Cursor query = db.rawQuery("SELECT * FROM notes", null);
-                String content = "ikik";
-                while(query.moveToNext()) {
-                   content = query.getString(1);
-                }
-                data.add(content);
-                adapter.notifyItemInserted(clickCounter);
-                clickCounter++;
-                query.close();
-                db.close();
-                 **/
             }
         });
+
+/**
+        Button NoteActionBtn = findViewById(R.id.cardview);
+        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
+                if (TbLong.getVisibility() != View.VISIBLE) {
+
+                    TbLong.setVisibility(View.VISIBLE);
+                };
+                return true;
+            }
+        }); **/
+
 
     }
 
@@ -89,16 +79,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_settings:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -117,11 +113,32 @@ public class MainActivity extends AppCompatActivity {
     public void add(View view){
         Intent intent = new Intent(this, NotesActivity.class);
     }
-    public void NewNote(){
-        Intent intent = new Intent(this, NoteActivity.class);
-
-        startActivity(intent);
+    protected void NewNote(){
+          Intent intent = new Intent(this, NoteActivity.class);
+          long noteID = dataNotes.size() + 1;
+          intent.putExtra("extraNoteKey", new Note(noteID, "", "", ""));
+          startActivity(intent);
     }
 
-
+    public ArrayList<codergrad.bloknot.Note> setDataNotes(){
+        dbAdapter = new DatabaseAdapter(this);
+        dbAdapter.open();
+        dataNotes = dbAdapter.getNotes();
+        dbAdapter.close();
+        return dataNotes;
+    }
+    public void buildRecyclerView(ArrayList<Note> dataNotes){
+        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
+        int numberOfColumns = 3;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes, new MyRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                intent.putExtra("extraNoteKey", dataNotes.get(position));
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+    }
 }
