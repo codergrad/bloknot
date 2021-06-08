@@ -26,6 +26,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 /*
 
 Тест коммит 1
+Тест коммит 2
 
  */
     // "Надуваем" ячейку из XML-макета
