@@ -23,7 +23,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.mData = data;
         this.mClickListener = onItemClick;
     }
-// Pull rebase github test
+/*
+
+Тест коммит 1
+
+ */
     // "Надуваем" ячейку из XML-макета
     @Override
     @NonNull
