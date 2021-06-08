@@ -60,11 +60,9 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem ShareMenuItem = menu.findItem(R.id.action_delete);
+        ShareMenuItem.setVisible(true);
         return true;
-
-        MenuItem menuItem = menu.findItem(R.id.action_delete);
-        menuItem.setVisible(true);
-
     }
 
     @Override
