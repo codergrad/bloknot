@@ -56,6 +56,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             cardviewTitle = itemView.findViewById(R.id.cardviewTitle);
             cardviewContent = itemView.findViewById(R.id.cardviewContent);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    return true;
+                }
+            });
         }
 
         @Override

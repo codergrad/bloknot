@@ -61,15 +61,14 @@ public class MainActivity extends AppCompatActivity  {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
+        MenuItem menuItem = menu.findItem(R.id.action_delete);
+        menuItem.setVisible(true);
+
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id)
         {
@@ -79,6 +78,8 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent);
 
                 return true;
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -93,10 +94,10 @@ public class MainActivity extends AppCompatActivity  {
         adapter.close();
     }
 
-
     public void add(View view){
         Intent intent = new Intent(this, NotesActivity.class);
     }
+
     protected void NewNote(){
           Intent intent = new Intent(this, NoteActivity.class);
           long noteID = dataNotes.size() + 1;
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity  {
         dbAdapter.close();
         return dataNotes;
     }
+
     public void buildRecyclerView(ArrayList<Note> dataNotes){
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 3;
