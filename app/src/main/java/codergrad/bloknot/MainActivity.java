@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,16 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem ShareMenuItem = menu.findItem(R.id.action_delete);
-        ShareMenuItem.setVisible(true);
+
+        /*
+        Установка видимости элементов меню в тулбар
+        MenuItem MenuItemDelete = menu.findItem(R.id.action_delete);
+        MenuItemDelete.setVisible(true);
+        MenuItem MenuItemFix = menu.findItem(R.id.action_fix);
+        MenuItemFix.setVisible(true);
+        MenuItem MenuItemMarkAll = menu.findItem(R.id.action_markAll);
+        MenuItemMarkAll.setVisible(true);
+        */
         return true;
     }
 
@@ -74,10 +83,24 @@ public class MainActivity extends AppCompatActivity  {
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-
                 return true;
 
+            case R.id.action_delete:
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "удалить", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
 
+            case R.id.action_fix:
+                Toast toast1 = Toast.makeText(getApplicationContext(),
+                        "зазфиксировать", Toast.LENGTH_SHORT);
+                toast1.show();
+                return true;
+            case R.id.action_markAll:
+                Toast toast2 = Toast.makeText(getApplicationContext(),
+                        "выделить всё", Toast.LENGTH_SHORT);
+                toast2.show();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
