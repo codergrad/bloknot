@@ -30,7 +30,8 @@
             android:layout_margin="5dp"
             android:background="#ededed"
             android:gravity="start"
-            android:textFontWeight="800" />
+            android:textFontWeight="800"
+            android:textSize="10sp"/>
         <TextView
             android:id="@+id/cardviewContent"
             android:layout_below="@id/cardviewTitle"

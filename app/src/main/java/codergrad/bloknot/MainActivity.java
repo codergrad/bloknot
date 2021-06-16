@@ -1,35 +1,34 @@
 package codergrad.bloknot;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity  {
 
+    private static final String ACCESS_MESSAGE ="ACCESS_MESSAGE" ;
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
     DatabaseAdapter dbAdapter;
@@ -38,54 +37,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SimpleCursorAdapter userAdapter;
     ArrayAdapter<Note> arrayAdapter;
     private Bundle savedInstanceState;
-
+    ArrayList<Note> dataNotes;
+    private Object Note;
+    private Object ArrayList;
+    private static  final int REQUEST_ACCESS_TYPE=1;
+    static final String AGE_KEY = "Size_text";
+    private static final String TAG = "MainActivity";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        dbAdapter = new DatabaseAdapter(this);
-        dbAdapter.open();
-        ArrayList<Note> dataNotes = dbAdapter.getNotes();
-        dbAdapter.close();
-
-        //// PLACEHOLDERS
-        dataNotes.add(new Note(0,"First title", "Content","27.04.2021"));
-        dataNotes.add(new Note(1,"2 title", "22Content","27.04.2021"));
-        dataNotes.add(new Note(2,"3333 title", "Content","27.04.2021"));
-        ////
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        int numberOfColumns = 3;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes);
-
-        recyclerView.setAdapter(adapter);
+        setDataNotes();
+        buildRecyclerView(dataNotes);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+
         fab.setOnClickListener(new View.OnClickListener() {
-            long clickCounter = 0; //рудимент
             @Override
             public void onClick(View view) {
-                /** Это старый код, который добавлял без DatabaseAdapter даннные напрямую в БД. Будет переписан
-                SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
-                db.execSQL("CREATE TABLE IF NOT EXISTS notes(indx INTEGER, title TEXT, content TEXT, date TEXT)");
-                db.execSQL("INSERT INTO notes VALUES (0, 'Sample title', 'Sample Content', '22.01.2021')");
-                Cursor query = db.rawQuery("SELECT * FROM notes", null);
-                String content = "ikik";
-                while(query.moveToNext()) {
-                   content = query.getString(1);
-                }
-                data.add(content);
-                adapter.notifyItemInserted(clickCounter);
-                clickCounter++;
-                query.close();
-                db.close();
-                 **/
+                NewNote();
             }
-
         });
+
+/**
+        Button NoteActionBtn = findViewById(R.id.cardview);
+        NoteActionBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toolbar TbLong = findViewById(R.id.toolbarLongClk);
+                if (TbLong.getVisibility() != View.VISIBLE) {
+
+                    TbLong.setVisibility(View.VISIBLE);
+                };
+                return true;
+            }
+        }); **/
+
+
     }
 
     @Override
@@ -95,53 +85,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_settings:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivityForResult(intent, 1);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
     public void OnResume(){
         super.onResume();
         DatabaseAdapter adapter = new DatabaseAdapter(this);
         adapter.open();
         ArrayList<Note> notes = adapter.getNotes();
-
-
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         adapter.close();
     }
+
+
     public void add(View view){
         Intent intent = new Intent(this, NotesActivity.class);
-        startActivity(intent);
     }
-}
-    Button action_settings;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        this.savedInstanceState = savedInstanceState;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        action_settings = (Button) findViewById(R.id.action_settings);
-        action_settings.setOnClickListener(this);
+    protected void NewNote(){
+          Intent intent = new Intent(this, NoteActivity.class);
+          long noteID = dataNotes.size() + 1;
+          intent.putExtra("extraNoteKey", new Note(noteID, "", "", ""));
+          startActivity(intent);
     }
-     @Override
-    public void onClick(View v) {
-        switch (v. getId()) {
-            case R.id.action_settings:
-                Intent intent = new Intent (this, SettingsActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-}
 
+    public ArrayList<codergrad.bloknot.Note> setDataNotes(){
+        dbAdapter = new DatabaseAdapter(this);
+        dbAdapter.open();
+        dataNotes = dbAdapter.getNotes();
+        dbAdapter.close();
+        return dataNotes;
+    }
+    public void buildRecyclerView(ArrayList<Note> dataNotes){
+        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
+        int numberOfColumns = 3; //TODO:Рахзмер колонк
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, dataNotes, new MyRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                intent.putExtra("extraNoteKey", dataNotes.get(position));
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        TextView cardviewTitle = (TextView) findViewById(R.id.cardviewTitle);
+        float cardviewFontSize = data.getFloatExtra("cardviewFontSizeExtra", 10);
+        cardviewTitle.setTextSize(cardviewFontSize);
+    }
+
+
+}
